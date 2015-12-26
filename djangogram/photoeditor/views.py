@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 
 
 class IndexView(TemplateView):
-    template_name = 'imagefilter/canvas.html'
+    template_name = 'photoeditor/canvas.html'
 
 
 class LoginRequiredMixin(object):
@@ -25,12 +25,12 @@ def login(request):
     # context = RequestContext(request, {
     #     'request': request, 'user': request.user})
     # return render_to_response('login.html', context_instance=context)
-    return render(request, 'login.html')
+    return render(request, 'photoeditor/login.html')
 
 
 @login_required(login_url='/')
 def home(request):
-    return render_to_response('home.html')
+    return render_to_response('photoeditor/canvas.html')
 
 
 def logout(request):
