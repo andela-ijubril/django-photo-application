@@ -143,6 +143,9 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email',
+}
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
@@ -157,4 +160,3 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details',
     'photoeditor.pipeline.save_user_profile',
 )
-
