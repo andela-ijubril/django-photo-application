@@ -9,4 +9,17 @@ $('#img-effect').find('img').attr('src', image_to_be_edited);
 });
 
 
+
+    $('#file_upload').fileupload({
+    url: 'php/index.php',
+    done: function (e, data) {
+        $.each(data.result, function (index, file) {
+            $('<p/>').text(file.name).appendTo('body');
+        });
+    }
+});
+
+
+
+
 });

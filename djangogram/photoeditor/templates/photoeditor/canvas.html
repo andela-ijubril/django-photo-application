@@ -78,6 +78,16 @@
         <div class="col-md-3 sidebar-container">
             <div class="sidebar">
                 <div class="sidebar-image">
+
+
+
+                    <input id="fileupload" type="file" name="files[]" data-url="#" multiple>
+
+
+
+
+
+
                     <div class="single-image">
                         <a href="#">
                        <img src="{% static "img/baby.jpg" %}" class="img-responsive" id="image-sidebar">
@@ -94,20 +104,6 @@
                     <div class="single-image">
                        <img src="{% static "img/baby.jpg" %}" class="img-responsive">
                     </div>
-
-                </div>
-
-
-                <div style="position:relative;">
-                    &nbsp;
-                    <span class='label label-info' id="upload-file-info"></span>
-                    <a class='btn btn-primary text-center' href='javascript:;' id="choose-button">
-
-                        Choose File...
-                        <input type="file"
-                               style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'
-                               name="file_source" size="40" onchange='$("#upload-file-info").html($(this).val());'>
-                    </a>
 
                 </div>
 
@@ -152,6 +148,33 @@
 </div>
 
 <script src="{% static "js/jquery.min.js" %}"></script>
+
+
+ <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+        <script src="{% static "js/jquery.fileupload.js" %}"></script>
+        <script src="{% static "js/jquery.iframe-transport.js" %}"></script>
+        <script src="{% static "js/json_parse.js" %}"></script>
+<script src="{% static "js/jquery.ui.widget.js" %}"></script>
+{#        <script src="js/upload.js"></script>#}
+
+
+<script>
+$(function () {
+
+    $('#fileupload').fileupload({
+
+        dataType: 'json',
+        done: function (e, data) {
+            console.log("I got here");
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        }
+    });
+});
+</script>
+
+
 <script src="{% static "js/script.js" %}"></script>
 </body>
 </html>

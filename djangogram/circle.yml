@@ -6,42 +6,45 @@ machine:
 dependencies:
   pre:
     - pip install --upgrade pip
-    - pip install --upgrade virtualenv
-#    - npm install bower
+    - pip install -r requirements.txt
+    - pip install coveralls
+    - npm install bower
 test:
   override:
-    - python codango/manage.py bower install --settings=djangogram.settings.test
-    - python codango/manage.py collectstatic --noinput --djangogram=codango.settings.test
-    - python codango/manage.py test codango --settings=djangogram.settings.test
+    - bower install
+    - python djangophotoapp/manage.py collectstatic --noinput --settings=djangogram.settings.test
+    - python djangophotoapp/manage.py test djangophotoapp --settings=djangogram.settings.test
+    - coverage run djangogram/manage.py test
+  post:
+    - coveralls
 deployment:
   staging:
-    branch: develop
-    commands:
-      - git fetch origin --unshallow
-      - git push -f git@heroku.com:codango-staging.git $CIRCLE_SHA1:master
-      - heroku run python codango/manage.py collectstatic --noinput --settings=codango.settings --app codango-staging
-      - heroku run python codango/manage.py makemigrations --settings=codango.settings --app codango-staging
-      - heroku run python codango/manage.py migrate --settings=codango.settings --app codango-staging
-      - heroku ps:scale web=1 --app codango-staging
-      - heroku ps:scale worker=1 --app codango-staging
-
-
-
-dependencies:
-  pre:
-    - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-    - sudo dpkg -i cf-cli_amd64.deb
-    - cf -v
-
-test:
-  post:
-    - cf api https://api.ng.bluemix.net
-    - cf auth $BLUEMIX_USER $BLUEMIX_PASSWORD
-    - cf target -o $BLUEMIX_USER -s dev
-    - cf a
-
-deployment:
-  production:
     branch: master
     commands:
-      - cf push
+      - git fetch origin --unshallow
+      - git push -f git@heroku.com:myphotoapplication.git $CIRCLE_SHA1:master
+      - heroku run python djangogram/manage.py collectstatic --noinput --settings=djangogram.settings --app djangogram
+      - heroku run python djangogram/manage.py makemigrations --settings=djangogram.settings --app djangogram
+      - heroku run python djangophotoapp/manage.py migrate --settings=djangophotoapp.settings --app djangogram
+      - heroku ps:scale web=1 --app djangogram
+
+
+
+#dependencies:
+#  pre:
+#    - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+#    - sudo dpkg -i cf-cli_amd64.deb
+#    - cf -v
+#
+#test:
+#  post:
+#    - cf api https://api.ng.bluemix.net
+#    - cf auth $BLUEMIX_USER $BLUEMIX_PASSWORD
+#    - cf target -o $BLUEMIX_USER -s dev
+#    - cf a
+#
+#deployment:
+#  production:
+#    branch: master
+#    commands:
+#      - cf push
