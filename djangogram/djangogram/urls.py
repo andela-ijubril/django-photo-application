@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^$', 'photoeditor.views.login'),
-    url(r'^cool/$', views.IndexView.as_view()),
-    url(r'^home/$', 'photoeditor.views.home'),
+    url(r'^index/$', 'photoeditor.views.home'),
     url(r'^logout/$', 'photoeditor.views.logout'),
+    url(r'^cool/$', views.IndexView.as_view()),
+    url(r'^home/$', views.HomeView.as_view()),
 ]

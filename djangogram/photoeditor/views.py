@@ -3,6 +3,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
+from forms import PhotoForm
+import json
 # from django.template.context import RequestContext
 
 
@@ -36,3 +38,13 @@ def home(request):
 def logout(request):
     auth_logout(request)
     return redirect('/')
+
+
+class HomeView(TemplateView):
+    form_class = PhotoForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        return

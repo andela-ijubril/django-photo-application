@@ -81,7 +81,19 @@
 
 
 
-                    <input id="fileupload" type="file" name="files[]" data-url="#" multiple>
+                   <form id="upload" method="post" action="/home/" enctype="multipart/form-data">
+			<div id="drop">
+				Drop Here
+
+				<a>Browse</a>
+				<input type="file" name="upl" multiple />
+			</div>
+
+			<ul>
+				<!-- The file uploads will be shown here -->
+			</ul>
+
+		</form>
 
 
 
@@ -153,25 +165,14 @@
  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
         <script src="{% static "js/jquery.fileupload.js" %}"></script>
         <script src="{% static "js/jquery.iframe-transport.js" %}"></script>
+        <script src="{% static "js/jquery.knob.min.js" %}"></script>
         <script src="{% static "js/json_parse.js" %}"></script>
 <script src="{% static "js/jquery.ui.widget.js" %}"></script>
 {#        <script src="js/upload.js"></script>#}
 
 
 <script>
-$(function () {
 
-    $('#fileupload').fileupload({
-
-        dataType: 'json',
-        done: function (e, data) {
-            console.log("I got here");
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo(document.body);
-            });
-        }
-    });
-});
 </script>
 
 

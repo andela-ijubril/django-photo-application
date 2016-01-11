@@ -141,3 +141,10 @@ body, .page-container, .main-container {
     margin: auto;
     display: block;
 }
+
+#drop input{
+    display: none;
+}
+#upload{
+    height: 70px;
+}
