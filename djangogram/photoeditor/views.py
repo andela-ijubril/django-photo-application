@@ -52,8 +52,7 @@ class HomeView(View):
         if form.is_valid():
             file_size = form.files['image'].size
             if file_size <= MAX_IMAGE_SIZE:
-                import pdb; pdb.set_trace()
-                form.save(commit=False)
+                form.save()
                 return JsonResponse({
                     'status': 'success'
                 }, status=200)
