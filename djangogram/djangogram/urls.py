@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from photoeditor import views
 
 urlpatterns = [
@@ -26,4 +28,7 @@ urlpatterns = [
     url(r'^logout/$', 'photoeditor.views.logout'),
     url(r'^cool/$', views.IndexView.as_view()),
     url(r'^home/$', views.HomeView.as_view()),
-]
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT,
+    })
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

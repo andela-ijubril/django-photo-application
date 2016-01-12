@@ -3,15 +3,9 @@ var image_sidebar = $('#image-sidebar');
 
 var image_content = "";
 
-$(document).ready(function() {
-$('.single-image').click(function(){
-var image_to_be_edited = $(this).find('img').attr('src');
-$('#img-effect').find('img').attr('src', image_to_be_edited);
-});
 
+ var initUploadPlugin = function(){
 
-
-  $(function(){
 
     var ul = $('#upload ul');
 
@@ -19,14 +13,14 @@ $('#img-effect').find('img').attr('src', image_to_be_edited);
         // Simulate a click on the file input button
         // to show the file browser dialog
         $(this).parent().find('input').click();
+
     });
 
     // Initialize the jQuery File Upload plugin
-    $('#upload').fileupload({
 
+    $('#upload').fileupload({
         // This element will accept file drag/drop uploading
         dropZone: $('#drop'),
-
         // This function is called when a file is added to the queue;
         // either via the browse button, or via drag/drop:
         add: function (e, data) {
@@ -58,9 +52,9 @@ $('#img-effect').find('img').attr('src', image_to_be_edited);
             });
 
             // Automatically upload the file once it is added to the queue
+
             var jqXHR = data.submit();
         },
-
         progress: function(e, data){
 
             // Calculate the completion percentage of the upload
@@ -74,43 +68,48 @@ $('#img-effect').find('img').attr('src', image_to_be_edited);
                 data.context.removeClass('working');
             }
         },
-
         done: function(e, data){
 
+            if (data.textStatus == 'success'){
+                console.log("I worked and uploaded successfully");
+            }
         },
-
-        fail:function(e, data){
+        fail: function(e, data){
             // Something has gone wrong!
+            console.log("I failed to upload");
             data.context.addClass('error');
         }
-
     });
 
     // Prevent the default action when a file is dropped on the window
-    $(document).on('drop dragover', function (e) {
-        e.preventDefault();
-    });
+    //    $(document).on('drop dragover', function (e) {
+    //    e.preventDefault();
+    //});
 
-    // Helper function that formats the file sizes
-    function formatFileSize(bytes) {
-        if (typeof bytes !== 'number') {
-            return '';
-        }
+}
 
-        if (bytes >= 1000000000) {
-            return (bytes / 1000000000).toFixed(2) + ' GB';
-        }
 
-        if (bytes >= 1000000) {
-            return (bytes / 1000000).toFixed(2) + ' MB';
-        }
-
-        return (bytes / 1000).toFixed(2) + ' KB';
+// Helper function that formats the file sizes
+function formatFileSize(bytes) {
+    if (typeof bytes !== 'number') {
+        return '';
     }
 
-});
+    if (bytes >= 1000000000) {
+        return (bytes / 1000000000).toFixed(2) + ' GB';
+    }
 
+    if (bytes >= 1000000) {
+        return (bytes / 1000000).toFixed(2) + ' MB';
+    }
 
+    return (bytes / 1000).toFixed(2) + ' KB';
+}
 
-
+$(document).ready(function() {
+   $('.single-image').click(function(){
+        var image_to_be_edited = $(this).find('img').attr('src');
+        $('#img-effect').find('img').attr('src', image_to_be_edited);
+    });
+    initUploadPlugin();
 });
