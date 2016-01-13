@@ -1,3 +1,7 @@
+$.ajaxSetup({
+    headers: {
+        "X-CSRFToken": $("meta[name='csrf-token']").attr("content")
+    }});
 var image_html = "<div class=\"single-image\"><a href=\"#\"><img src=\"\" class=\"img-responsive\" id=\"image-sidebar\"> </a> </div>";
 var image_sidebar = $('#image-sidebar');
 
@@ -15,7 +19,7 @@ function send_effect(effect_name, image_url, image_id){
 
         },
         error: function(){
-            
+
         }
     })
 }
@@ -25,6 +29,8 @@ var apply_effects = function(){
 var effect_class = $('.effects > button');
     effect_class.click(function(){
         var effect = $(this).data("effect");
+        var image_url = "/effect/";
+        send_effect(effect, image_url, 2);
 
     });
 };

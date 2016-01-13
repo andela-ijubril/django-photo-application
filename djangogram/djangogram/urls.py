@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^logout/$', 'photoeditor.views.logout'),
     url(r'^cool/$', views.IndexView.as_view()),
     url(r'^home/$', views.HomeView.as_view()),
+    url(r'^effect/$', views.EffectView.as_view()),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': settings.MEDIA_ROOT,
     })

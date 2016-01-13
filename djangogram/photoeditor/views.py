@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, View
 from forms import PhotoForm
 from models import Photo
+from effects import photo_effects
 from djangogram.settings.base import MAX_IMAGE_SIZE
 import json
 
@@ -63,11 +64,24 @@ class HomeView(TemplateView):
                 }, status=403)
 
     def get_context_data(self, **kwargs):
-        # get all images belonging to logged in user
         images = Photo.objects.all()
-
-
         context = super(HomeView, self).get_context_data(**kwargs)
-
         context['images'] = images
         return context
+
+
+class EffectView(View):
+    def post(self, request, *args, **kwargs):
+        effect_name = request.POST['effect_name']
+        imageid = request.POST['image_id']
+        # imagefilter = request.POST['img_filter']
+
+        print "The image effect is" + effect_name
+        print "The image id is" + imageid
+
+        # import pdb; pdb.set_trace()
+        photo_effects.get(effect_name)
+
+        return JsonResponse({
+                    'status': 'success'
+                }, status=200)
