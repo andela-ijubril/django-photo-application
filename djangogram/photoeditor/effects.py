@@ -4,6 +4,8 @@ from PIL import Image, ImageFilter, ImageEnhance, ImageOps
 
 
 class GramEffects(object):
+    def __init__(self, image):
+        self.original_image = Image.open(image)
 
     def blur(self):
         pass
@@ -32,27 +34,35 @@ class GramEffects(object):
     def solarize(self):
         pass
 
-    def greyscale(self):
-        pass
+    @staticmethod
+    def greyscale(image):
+        original_image = Image.open(image)
+        return ImageOps.grayscale(original_image)
 
     def mirror(self):
         pass
 
-    def brighten(self):
-        return 4
+    @staticmethod
+    def brighten(image):
+        original_image = Image.open(image)
+        enhancer = ImageEnhance.Brightness(original_image)
+        return enhancer.enhance(1.5)
 
-    def flip(self):
-        pass
+    @staticmethod
+    def flip(image):
+        original_image = Image.open(image)
+        return ImageOps.flip(original_image)
 
-    def invert(self):
-        pass
+    def invert(self, image):
+        original_image = Image.open(image)
+        return ImageOps.invert(self.original_image)
 
 
-gram_effects = GramEffects()
 photo_effects = {
-    "flip": gram_effects.flip(),
-    "brightness": gram_effects.brighten(),
-    "invert": gram_effects.invert(),
+    "flip": GramEffects.flip,
+    "brightness": GramEffects.brighten,
+    "invert": GramEffects.invert,
+    "greyscale": GramEffects.greyscale
 }
 
 

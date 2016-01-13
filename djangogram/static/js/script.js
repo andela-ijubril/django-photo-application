@@ -16,6 +16,9 @@ function send_effect(effect_name, image_url, image_id){
             image_id: image_id
         },
         success: function(){
+            //var img_src = applied_effect;
+            //    $("#img").attr("src", img_src + "?" + new Date().getTime());
+            console.log("I returned success")
 
         },
         error: function(){
@@ -24,13 +27,15 @@ function send_effect(effect_name, image_url, image_id){
     })
 }
 
-var apply_effects = function(){
+var apply_effects = function(image_id){
 
 var effect_class = $('.effects > button');
     effect_class.click(function(){
         var effect = $(this).data("effect");
+
+        console.log(image_id);
         var image_url = "/effect/";
-        send_effect(effect, image_url, 2);
+        send_effect(effect, image_url, image_id);
 
     });
 };
@@ -140,8 +145,10 @@ function formatFileSize(bytes) {
 $(document).ready(function() {
    $('.single-image').click(function(){
         var image_to_be_edited = $(this).find('img').attr('src');
+        var image_id = $(this).find('img').data('id');
         $('#img-effect').find('img').attr('src', image_to_be_edited);
+       apply_effects(image_id);
     });
     initUploadPlugin();
-    apply_effects();
+
 });

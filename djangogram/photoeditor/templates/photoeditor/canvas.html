@@ -95,7 +95,7 @@
                     {% for image in images %}
                            <div class="single-image">
                         <a href="#">
-                            <img src="{{ image.image.url }}" class="img-responsive" id="image-sidebar">
+                            <img src="{{ image.image.url }}" class="img-responsive" id="image-sidebar" data-id="{{ image.id }}">
                         </a>
                     </div>
                     {% endfor %}
@@ -127,7 +127,7 @@
             {#            <canvas id="canvas"></canvas>#}
             <div class="img-container" id="img-effect">
                 {#                <img src="{% static "img/baby.jpg" %}" class="img-responsive" id="img">#}
-                <img class="img-responsive" id="img">
+                <img class="img-responsive" id="img" data-id="">
             </div>
             <div class="row">
 
@@ -139,7 +139,7 @@
                         <button id="brightnessbtn" class="btn btn-primary" data-effect="brightness">Brightness</button>
                         <button id="noisebtn" class="btn btn-primary" data-effect="noise">Noise</button>
                         <button id="sepiabtn" class="btn btn-primary" data-effect="sepia">Sepia</button>
-                        <button id="contrastbtn" class="btn btn-primary" data-effect="brightness">Contrast</button>
+                        <button id="contrastbtn" class="btn btn-primary" data-effect="greyscale">GreyScale</button>
                         <button id="colorbtn" class="btn btn-primary" data-effect="colorize">Colorize</button>
                     </nav>
 

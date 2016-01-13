@@ -1,3 +1,5 @@
+import os
+
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render_to_response, redirect, render
 from django.contrib.auth import logout as auth_logout
@@ -74,14 +76,18 @@ class EffectView(View):
     def post(self, request, *args, **kwargs):
         effect_name = request.POST['effect_name']
         imageid = request.POST['image_id']
+        image_to_filter = Photo.objects.get(id=imageid).image.path
         # imagefilter = request.POST['img_filter']
 
         print "The image effect is" + effect_name
         print "The image id is" + imageid
 
         # import pdb; pdb.set_trace()
-        photo_effects.get(effect_name)
+        applied_effect = photo_effects.get(effect_name)(image_to_filter)
+        filename, file_extension = os.path.splitext(image_to_filter)
+        applied_effect.save(filename + 'edited' + file_extension)
 
         return JsonResponse({
-                    'status': 'success'
+                    'status': 'success',
+                    # 'applied_effect': applied_effect
                 }, status=200)
