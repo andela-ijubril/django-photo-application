@@ -3,6 +3,31 @@ var image_sidebar = $('#image-sidebar');
 
 var image_content = "";
 
+function send_effect(effect_name, image_url, image_id){
+    $.ajax({
+        url: image_url,
+        type: "POST",
+        data: {
+            effect_name: effect_name,
+            image_id: image_id
+        },
+        success: function(){
+
+        },
+        error: function(){
+            
+        }
+    })
+}
+
+var apply_effects = function(){
+
+var effect_class = $('.effects > button');
+    effect_class.click(function(){
+        var effect = $(this).data("effect");
+
+    });
+};
 
  var initUploadPlugin = function(){
 
@@ -112,4 +137,5 @@ $(document).ready(function() {
         $('#img-effect').find('img').attr('src', image_to_be_edited);
     });
     initUploadPlugin();
+    apply_effects();
 });

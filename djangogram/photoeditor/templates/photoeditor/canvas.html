@@ -91,6 +91,13 @@
                             <!-- The file uploads will be shown here -->
                         </ul>
                     </form>
+                    {% for image in images %}
+                           <div class="single-image">
+                        <a href="#">
+                            <img src="{{ image.image.url }}" class="img-responsive" id="image-sidebar">
+                        </a>
+                    </div>
+                    {% endfor %}
 
 
                     <div class="single-image">
@@ -126,17 +133,17 @@
                 <div class="col-md-12 effect-container">
 
 
-                    <nav class="filters">
+                    <nav class="effects">
                         <button id="resetbtn" class="btn btn-success">Reset Photo</button>
-                        <button id="brightnessbtn" class="btn btn-primary">Brightness</button>
-                        <button id="noisebtn" class="btn btn-primary">Noise</button>
-                        <button id="sepiabtn" class="btn btn-primary">Sepia</button>
-                        <button id="contrastbtn" class="btn btn-primary">Contrast</button>
-                        <button id="colorbtn" class="btn btn-primary">Colorize</button>
+                        <button id="brightnessbtn" class="btn btn-primary" data-effect="brightness">Brightness</button>
+                        <button id="noisebtn" class="btn btn-primary" data-effect="noise">Noise</button>
+                        <button id="sepiabtn" class="btn btn-primary" data-effect="sepia">Sepia</button>
+                        <button id="contrastbtn" class="btn btn-primary" data-effect="brightness">Contrast</button>
+                        <button id="colorbtn" class="btn btn-primary" data-effect="colorize">Colorize</button>
                     </nav>
 
 
-                    <nav class="filters">
+                    <nav class="effects">
                         <button id="hdrbtn" class="btn btn-warning">HDR Effect</button>
                         <button id="oldpaperbtn" class="btn btn-warning">Old Paper</button>
                         <button id="pleasantbtn" class="btn btn-warning">Pleasant</button>

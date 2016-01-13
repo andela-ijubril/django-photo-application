@@ -7,7 +7,6 @@ def get_upload_file_name(instance, filename):
     # filename = instance.userid + instance.file_extension
     # return 'user_{0}/{1}'.format(instance.user.id, filename)
     # filename = "media"
-    import pdb; pdb.set_trace()
     return 'user_media/{0}'.format(filename)
 
 

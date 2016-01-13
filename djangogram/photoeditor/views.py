@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, View
 from forms import PhotoForm
+from models import Photo
 from djangogram.settings.base import MAX_IMAGE_SIZE
 import json
 
@@ -43,7 +44,8 @@ def logout(request):
     return redirect('/')
 
 
-class HomeView(View):
+class HomeView(TemplateView):
+    template_name = 'photoeditor/canvas.html'
     form_class = PhotoForm
 
     def post(self, request, *args, **kwargs):
@@ -60,5 +62,12 @@ class HomeView(View):
                     'status': 'failed'
                 }, status=403)
 
-    def get(self, request):
-        return HttpResponse("I got here ")
+    def get_context_data(self, **kwargs):
+        # get all images belonging to logged in user
+        images = Photo.objects.all()
+
+
+        context = super(HomeView, self).get_context_data(**kwargs)
+
+        context['images'] = images
+        return context
