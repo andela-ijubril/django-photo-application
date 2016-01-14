@@ -19,9 +19,10 @@ deployment:
   staging:
     branch: master
     commands:
-      - git fetch origin --unshallow
+#      - git fetch origin --unshallow
       - git push -f git@heroku.com:djangogram.git $CIRCLE_SHA1:master
       - heroku run python djangogram/manage.py collectstatic --noinput --settings=djangogram.settings --app djangogram
       - heroku run python djangogram/manage.py makemigrations --settings=djangogram.settings --app djangogram
       - heroku run python djangogram/manage.py migrate --settings=djangophotoapp.settings --app djangogram
       - heroku ps:scale web=1 --app djangogram
+      
