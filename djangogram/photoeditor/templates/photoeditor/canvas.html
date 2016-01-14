@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="{{ csrf_token }}" name="csrf-token" />
     <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'css/flexgrid.min.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet"/>
@@ -80,29 +81,41 @@
                 <div class="sidebar-image">
 
 
-
-                    <input id="fileupload" type="file" name="files[]" data-url="#" multiple>
-
-
-
-
+                    <form id="upload" method="post" action="/home/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div id="drop">
+                            Drop Here
+                            <a>Browse</a>
+                            <input type="file" name="image" multiple/>
+                        </div>
+                        <ul>
+                            <!-- The file uploads will be shown here -->
+                        </ul>
+                    </form>
+                    {% for image in images %}
+                           <div class="single-image">
+                        <a href="#">
+                            <img src="{{ image.image.url }}" class="img-responsive" id="image-sidebar" data-id="{{ image.id }}">
+                        </a>
+                    </div>
+                    {% endfor %}
 
 
                     <div class="single-image">
                         <a href="#">
-                       <img src="{% static "img/baby.jpg" %}" class="img-responsive" id="image-sidebar">
-                            </a>
+                            <img src="{% static "img/baby.jpg" %}" class="img-responsive" id="image-sidebar">
+                        </a>
                     </div>
                     <div class="single-image">
                         <a href="#">
-                       <img src="{% static "img/fruit.jpeg" %}" class="img-responsive" id="image-sidebar">
-                            </a>
+                            <img src="{% static "img/fruit.jpeg" %}" class="img-responsive" id="image-sidebar">
+                        </a>
                     </div>
                     <div class="single-image">
-                       <img src="{% static "img/baby.jpg" %}" class="img-responsive">
+                        <img src="{% static "img/baby.jpg" %}" class="img-responsive">
                     </div>
                     <div class="single-image">
-                       <img src="{% static "img/baby.jpg" %}" class="img-responsive">
+                        <img src="{% static "img/baby.jpg" %}" class="img-responsive">
                     </div>
 
                 </div>
@@ -111,30 +124,30 @@
             </div>
         </div>
         <div class="col-md-9 canvas-container">
-{#            <canvas id="canvas"></canvas>#}
+            {#            <canvas id="canvas"></canvas>#}
             <div class="img-container" id="img-effect">
-{#                <img src="{% static "img/baby.jpg" %}" class="img-responsive" id="img">#}
-                <img class="img-responsive" id="img">
+                {#                <img src="{% static "img/baby.jpg" %}" class="img-responsive" id="img">#}
+                <img class="img-responsive" id="img" data-id="">
             </div>
             <div class="row">
 
                 <div class="col-md-12 effect-container">
 
 
-                    <nav class="filters">
+                    <nav class="effects">
                         <button id="resetbtn" class="btn btn-success">Reset Photo</button>
-                        <button id="brightnessbtn" class="btn btn-primary">Brightness</button>
-                        <button id="noisebtn" class="btn btn-primary">Noise</button>
-                        <button id="sepiabtn" class="btn btn-primary">Sepia</button>
-                        <button id="contrastbtn" class="btn btn-primary">Contrast</button>
-                        <button id="colorbtn" class="btn btn-primary">Colorize</button>
+                        <button id="brightnessbtn" class="btn btn-primary" data-effect="brightness">Brightness</button>
+                        <button id="noisebtn" class="btn btn-primary" data-effect="solarize">Solarize</button>
+                        <button id="sepiabtn" class="btn btn-primary" data-effect="sepia">Sepia</button>
+                        <button id="contrastbtn" class="btn btn-primary" data-effect="greyscale">GreyScale</button>
+                        <button id="colorbtn" class="btn btn-primary" data-effect="colorize">Colorize</button>
                     </nav>
 
 
-                    <nav class="filters">
+                    <nav class="">
                         <button id="hdrbtn" class="btn btn-warning">HDR Effect</button>
                         <button id="oldpaperbtn" class="btn btn-warning">Old Paper</button>
-                        <button id="pleasantbtn" class="btn btn-warning">Pleasant</button>
+                        <button id="share" class="btn btn-primary">Share on Facebook</button>
                         <button id="savebtn" class="btn btn-success">Save Image</button>
                     </nav>
 
@@ -149,29 +162,20 @@
 
 <script src="{% static "js/jquery.min.js" %}"></script>
 
-
- <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-        <script src="{% static "js/jquery.fileupload.js" %}"></script>
-        <script src="{% static "js/jquery.iframe-transport.js" %}"></script>
-        <script src="{% static "js/json_parse.js" %}"></script>
+<script src="{% static "js/jquery.knob.min.js" %}"></script>
+<script src="{% static "js/json_parse.js" %}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <script src="{% static "js/jquery.ui.widget.js" %}"></script>
+<script src="{% static "js/jquery.iframe-transport.js" %}"></script>
+<script src="{% static "js/jquery.fileupload.js" %}"></script>
+
+
+
 {#        <script src="js/upload.js"></script>#}
 
 
 <script>
-$(function () {
 
-    $('#fileupload').fileupload({
-
-        dataType: 'json',
-        done: function (e, data) {
-            console.log("I got here");
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo(document.body);
-            });
-        }
-    });
-});
 </script>
 
 

@@ -32,7 +32,7 @@ canvas {
     height: auto;
 }
 
-.filters button {
+.effects button {
     margin: 10px 0;
 }
 
@@ -140,4 +140,11 @@ body, .page-container, .main-container {
     height: 100%;
     margin: auto;
     display: block;
+}
+
+#drop input{
+    display: none;
+}
+#upload{
+    height: 70px;
 }

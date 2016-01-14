@@ -16,13 +16,20 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from photoeditor import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^$', 'photoeditor.views.login'),
-    url(r'^cool/$', views.IndexView.as_view()),
-    url(r'^home/$', 'photoeditor.views.home'),
+    url(r'^index/$', 'photoeditor.views.home'),
     url(r'^logout/$', 'photoeditor.views.logout'),
-]
+    url(r'^cool/$', views.IndexView.as_view()),
+    url(r'^home/$', views.HomeView.as_view()),
+    url(r'^effect/$', views.EffectView.as_view()),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT,
+    })
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
