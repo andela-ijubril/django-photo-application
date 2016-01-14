@@ -12,8 +12,8 @@ dependencies:
 test:
   override:
     - bower install
-    - python djangophotoapp/manage.py collectstatic --noinput --settings=djangogram.settings.test
-    - python djangophotoapp/manage.py test djangophotoapp --settings=djangogram.settings.test
+    - python djangogram/manage.py collectstatic --noinput --settings=djangogram.settings.test
+    - python djangogram/manage.py test djangogram --settings=djangogram.settings.test
     - coverage run djangogram/manage.py test
   post:
     - coveralls
@@ -22,29 +22,8 @@ deployment:
     branch: master
     commands:
       - git fetch origin --unshallow
-      - git push -f git@heroku.com:myphotoapplication.git $CIRCLE_SHA1:master
+      - git push -f git@heroku.com:djangogram.git $CIRCLE_SHA1:master
       - heroku run python djangogram/manage.py collectstatic --noinput --settings=djangogram.settings --app djangogram
       - heroku run python djangogram/manage.py makemigrations --settings=djangogram.settings --app djangogram
-      - heroku run python djangophotoapp/manage.py migrate --settings=djangophotoapp.settings --app djangogram
+      - heroku run python djangogram/manage.py migrate --settings=djangophotoapp.settings --app djangogram
       - heroku ps:scale web=1 --app djangogram
-
-
-
-#dependencies:
-#  pre:
-#    - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-#    - sudo dpkg -i cf-cli_amd64.deb
-#    - cf -v
-#
-#test:
-#  post:
-#    - cf api https://api.ng.bluemix.net
-#    - cf auth $BLUEMIX_USER $BLUEMIX_PASSWORD
-#    - cf target -o $BLUEMIX_USER -s dev
-#    - cf a
-#
-#deployment:
-#  production:
-#    branch: master
-#    commands:
-#      - cf push
