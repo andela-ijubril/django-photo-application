@@ -40,6 +40,14 @@ var effect_class = $('.effects > button');
     });
 };
 
+var deletebtn = $('#delete');
+var deleteImage = function () {
+    deletebtn.click(function () {
+       var image_to_be_deleted =  $("#img").attr("src");
+        console.log(image_to_be_deleted);
+    });
+};
+
 var fbShare = $('#share');
 fbShare.click(function () {
     var img_src = $("#img").attr("src");
@@ -179,4 +187,5 @@ $(document).ready(function() {
     });
     initUploadPlugin();
     facebook.init();
+    deleteImage();
 });

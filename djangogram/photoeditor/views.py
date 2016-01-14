@@ -72,6 +72,11 @@ class HomeView(TemplateView):
         context['images'] = images
         return context
 
+    def delete(self, request, *args, **kwargs):
+        image_id = request.POST['image_id']
+        photo = Photo.objects.get(id = image_id)
+        photo.delete()
+
 
 class EffectView(View):
     def post(self, request, *args, **kwargs):
