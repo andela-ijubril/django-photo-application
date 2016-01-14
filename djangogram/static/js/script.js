@@ -44,6 +44,7 @@ var fbShare = $('#share');
 fbShare.click(function () {
     var img_src = $("#img").attr("src");
             $(this).attr("href", img_src);
+    console.log(img_src);
     facebook.share(img_src);
 });
 
@@ -142,12 +143,12 @@ var facebook = {
         });
     },
     share: function(img_src) {
+        console.log("http://" + location.host + img_src);
         FB.ui({
             method: "feed",
             link: window.location.href,
-            caption: "Djangogram",
+            caption: "I just edited my picture with djangogram",
             picture: "http://" + location.host + img_src,
-
             description: "Djangogram is awesome... Kindly check it out"
         }, function(response) {});
     }
