@@ -14,7 +14,7 @@ test:
     - bower install
     - python djangogram/manage.py collectstatic --noinput --settings=djangogram.settings.test
     - python djangogram/manage.py test djangogram --settings=djangogram.settings.test
-    - coverage run djangogram/manage.py test
+    - coverage run djangogram/manage.py test djangogram --settings=djangogram.settings.test
   post:
     - coveralls
 deployment:
