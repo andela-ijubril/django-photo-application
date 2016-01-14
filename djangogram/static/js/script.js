@@ -145,7 +145,7 @@ var facebook = {
         // Load FB JS SDK asynchronously
         $.getScript("//connect.facebook.net/en_US/sdk.js", function() {
             FB.init({
-                appId: "1531263510520883",
+                appId: "1530581673929955",
                 version: "v2.5"
             });
         });
