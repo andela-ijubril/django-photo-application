@@ -63,31 +63,17 @@
                             <!-- The file uploads will be shown here -->
                         </ul>
                     </form>
-                    {% for image in images %}
-                           <div class="single-image">
-                        <a href="#">
-                            <img src="{{ image.image.url }}" class="img-responsive" id="image-sidebar" data-id="{{ image.id }}">
-                        </a>
-                    </div>
-                    {% endfor %}
+                    {% if images %}
+                        {% for image in images %}
+                               <div class="single-image">
+                            <a href="#">
+                                <img src="{{ image.image.url }}" class="img-responsive" id="image-sidebar" data-id="{{ image.id }}">
+                            </a>
+                        </div>
+                        {% endfor %}
+                {% endif %}
+                
 
-
-                    <div class="single-image">
-                        <a href="#">
-                            <img src="{% static "img/baby.jpg" %}" class="img-responsive" id="image-sidebar">
-                        </a>
-                    </div>
-                    <div class="single-image">
-                        <a href="#">
-                            <img src="{% static "img/fruit.jpeg" %}" class="img-responsive" id="image-sidebar">
-                        </a>
-                    </div>
-                    <div class="single-image">
-                        <img src="{% static "img/baby.jpg" %}" class="img-responsive">
-                    </div>
-                    <div class="single-image">
-                        <img src="{% static "img/baby.jpg" %}" class="img-responsive">
-                    </div>
 
                 </div>
 
