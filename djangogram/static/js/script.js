@@ -15,9 +15,9 @@ function send_effect(effect_name, image_url, image_id){
             effect_name: effect_name,
             image_id: image_id
         },
-        success: function(){
-            //var img_src = applied_effect;
-            //    $("#img").attr("src", img_src + "?" + new Date().getTime());
+        success: function(data){
+            var img_src = data['applied_effect'];
+                $("#img").attr("src", img_src + "?" + new Date().getTime());
             console.log("I returned success")
 
         },
@@ -39,6 +39,13 @@ var effect_class = $('.effects > button');
 
     });
 };
+
+var fbShare = $('#share');
+fbShare.click(function () {
+    var img_src = $("#img").attr("src");
+            $(this).attr("href", img_src);
+    facebook.share(img_src);
+});
 
  var initUploadPlugin = function(){
 
@@ -124,7 +131,27 @@ var effect_class = $('.effects > button');
 
 }
 
+var facebook = {
+    init: function() {
+        // Load FB JS SDK asynchronously
+        $.getScript("//connect.facebook.net/en_US/sdk.js", function() {
+            FB.init({
+                appId: "1531263510520883",
+                version: "v2.5"
+            });
+        });
+    },
+    share: function(img_src) {
+        FB.ui({
+            method: "feed",
+            link: window.location.href,
+            caption: "Djangogram",
+            picture: "http://" + location.host + img_src,
 
+            description: "Djangogram is awesome... Kindly check it out"
+        }, function(response) {});
+    }
+};
 // Helper function that formats the file sizes
 function formatFileSize(bytes) {
     if (typeof bytes !== 'number') {
@@ -150,5 +177,5 @@ $(document).ready(function() {
        apply_effects(image_id);
     });
     initUploadPlugin();
-
+    facebook.init();
 });
