@@ -14,6 +14,10 @@ html, body, .container-table {
 body {
     background-color: #f6f6f6;
 }
+.login-page{
+    background: url('https://snap-photos.s3.amazonaws.com/img-thumbs/960w/CG0LZC3FSI.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
 
 /* Basic CSS Styling */
 
@@ -147,4 +151,17 @@ body, .page-container, .main-container {
 }
 #upload{
     height: 70px;
+}
+
+.logo{
+    font-size: 40px;
+}
+.slogan{
+    font-size: 17px;
+    margin-bottom: 50px;
+}
+.fb-btn{
+    height: 50px;
+    width: 200px;
+    line-height: 35px;
 }

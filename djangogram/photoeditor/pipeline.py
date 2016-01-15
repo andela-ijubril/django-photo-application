@@ -9,5 +9,5 @@ def save_user_profile(backend, user, response, *args, **kwargs):
 
     # Query the userprofile database
     profile = UserProfile.objects.get_or_create(user=user)[0]
-    profile.photo = img_url
+    profile.profile_pics = img_url
     profile.save()
