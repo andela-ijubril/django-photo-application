@@ -14,6 +14,9 @@ class Photo(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User)
 
+    class Meta:
+        ordering = ['-created']
+
 
 class UserProfile(models.Model):
     social_id = models.CharField(max_length=100, blank=True)

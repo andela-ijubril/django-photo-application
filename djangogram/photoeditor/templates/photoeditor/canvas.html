@@ -38,8 +38,8 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">{{ request.user.get_full_name }}</a></li>
                         <li><img src="{{ profile.profile_pics }}" alt="{{ request.user.username }}'s + profile pics" class="img-circle img-responsive"></li>
+                        <li>Logged in as {{ request.user.get_full_name }}</li>
 
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -90,7 +90,7 @@
 
 
                     <nav class="effects">
-                        <button id="resetbtn" class="btn btn-success">Reset Photo</button>
+                        <button id="resetbtn" class="btn btn-success" data-effect="reset">Reset Photo</button>
                         <button id="brightnessbtn" class="btn btn-primary" data-effect="brightness">Brightness</button>
                         <button id="noisebtn" class="btn btn-primary" data-effect="solarize">Solarize</button>
                         <button id="sepiabtn" class="btn btn-primary" data-effect="sepia">Sepia</button>

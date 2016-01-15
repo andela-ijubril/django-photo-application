@@ -4,8 +4,19 @@ from PIL import Image, ImageFilter, ImageEnhance, ImageOps
 
 
 class GramEffects(object):
+
     def __init__(self, image):
         self.original_image = Image.open(image)
+
+    @classmethod
+    def g_open(cls, image):
+        '''
+        :param image:
+        :return: cls
+        '''
+        cls.image = Image.open(image)
+        return cls
+
 
     def blur(self):
         pass
@@ -34,29 +45,35 @@ class GramEffects(object):
     def solarize(self):
         pass
 
-    @staticmethod
-    def greyscale(image):
-        original_image = Image.open(image)
-        return ImageOps.grayscale(original_image)
+    @classmethod
+    def greyscale(cls):
+        # original_image = Image.open(image)
+        return ImageOps.grayscale(cls.image)
 
-    def mirror(self):
-        pass
+    @classmethod
+    def mirror(cls):
+        return ImageOps.mirror(cls.image)
 
-    @staticmethod
-    def brighten(image):
-        original_image = Image.open(image)
-        enhancer = ImageEnhance.Brightness(original_image)
+    @classmethod
+    def brighten(cls):
+        # original_image = Image.open(image)
+        enhancer = ImageEnhance.Brightness(cls.image)
         return enhancer.enhance(1.5)
 
-    @staticmethod
-    def flip(image):
-        original_image = Image.open(image)
-        return ImageOps.flip(original_image)
+    @classmethod
+    def flip(cls):
+        # original_image = Image.open(image)
+        return ImageOps.flip(cls.image)
 
-    def invert(self, image):
-        original_image = Image.open(image)
-        return ImageOps.invert(self.original_image)
+    @classmethod
+    def invert(cls):
+        # original_image = Image.open(image)
+        return ImageOps.invert(cls.image)
 
+    @classmethod
+    def g_apply(cls, effect_name):
+        effect = photo_effects.get(effect_name)
+        return effect()
 
 photo_effects = {
     "flip": GramEffects.flip,
@@ -64,5 +81,3 @@ photo_effects = {
     "invert": GramEffects.invert,
     "greyscale": GramEffects.greyscale
 }
-
-
