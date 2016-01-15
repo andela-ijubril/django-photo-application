@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="{{ csrf_token }}" name="csrf-token" />
+    <meta content="{{ csrf_token }}" name="csrf-token"/>
     <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'css/flexgrid.min.css' %}" type="text/css" rel="stylesheet"/>
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet"/>
@@ -32,14 +32,13 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-
-                    </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><img src="{{ profile.profile_pics }}" alt="{{ request.user.username }}'s + profile pics" class="img-circle img-responsive"></li>
-                        <li>Logged in as {{ request.user.get_full_name }}</li>
+                        <li><img src="{{ profile.profile_pics }}" alt="{{ request.user.username }}'s + profile pics"
+                                 class="img-circle img-responsive"></li>
+                        <li><a href="#">Logged in as {{ request.user.get_full_name }}</a></li>
+                        <li><a href="/logout">logout</a></li>
+
 
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -66,13 +65,14 @@
                     </form>
                     {% if images %}
                         {% for image in images %}
-                               <div class="single-image">
-                            <a href="#">
-                                <img src="{{ image.image.url }}" class="img-responsive" id="image-sidebar" data-id="{{ image.id }}">
-                            </a>
-                        </div>
+                            <div class="single-image">
+                                <a href="#">
+                                    <img src="{{ image.image.url }}" class="img-responsive image-sidebar"
+                                         id="image-sidebar" data-id="{{ image.id }}">
+                                </a>
+                            </div>
                         {% endfor %}
-                {% endif %}
+                    {% endif %}
 
                 </div>
 
@@ -95,13 +95,15 @@
                         <button id="noisebtn" class="btn btn-primary" data-effect="solarize">Solarize</button>
                         <button id="sepiabtn" class="btn btn-primary" data-effect="sepia">Sepia</button>
                         <button id="contrastbtn" class="btn btn-primary" data-effect="greyscale">GreyScale</button>
-                        <button id="colorbtn" class="btn btn-primary" data-effect="colorize">Colorize</button>
+                        <button id="mirrorbtn" class="btn btn-primary" data-effect="mirror">Mirror</button>
+                        <button id="deformbtn" class="btn btn-primary" data-effect="deform">Deform</button>
+                        <button id="blurbtn" class="btn btn-primary" data-effect="blur">Blur</button>
                     </nav>
 
 
                     <nav class="">
-                        <button id="hdrbtn" class="btn btn-warning">HDR Effect</button>
-                        <button id="delete" class="btn btn-danger">Delete</button>
+                        {#                        <button id="hdrbtn" class="btn btn-warning">HDR Effect</button>#}
+                        {#                        <button id="delete" class="btn btn-danger">Delete</button>#}
                         <button id="share" class="btn btn-primary">Share on Facebook</button>
                         <button id="savebtn" class="btn btn-success">Save Image</button>
                     </nav>
@@ -123,10 +125,6 @@
 <script src="{% static "js/jquery.ui.widget.js" %}"></script>
 <script src="{% static "js/jquery.iframe-transport.js" %}"></script>
 <script src="{% static "js/jquery.fileupload.js" %}"></script>
-
-
-
-{#        <script src="js/upload.js"></script>#}
 
 
 <script>

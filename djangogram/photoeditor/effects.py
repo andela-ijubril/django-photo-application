@@ -3,6 +3,13 @@ import os
 from PIL import Image, ImageFilter, ImageEnhance, ImageOps
 
 
+class Deformer:
+    def getmesh(self, im):
+        x, y = im.size
+        return [((0, 0, x, y), (0, 0, x, 0, x, y, y, 0))]
+
+deformer = Deformer()
+
 class GramEffects(object):
 
     def __init__(self, image):
@@ -17,9 +24,9 @@ class GramEffects(object):
         cls.image = Image.open(image)
         return cls
 
-
-    def blur(self):
-        pass
+    @classmethod
+    def blur(cls):
+        return cls.image.filter(ImageFilter.GaussianBlur(radius=2))
 
     def contour(self):
         pass
@@ -36,11 +43,9 @@ class GramEffects(object):
     def smooth(self):
         pass
 
-    def sharpen(self):
-        pass
-
-    def deform(self):
-        pass
+    @classmethod
+    def deform(cls):
+        return ImageOps.deform(cls.image, deformer=deformer)
 
     def solarize(self):
         pass
@@ -79,5 +84,8 @@ photo_effects = {
     "flip": GramEffects.flip,
     "brightness": GramEffects.brighten,
     "invert": GramEffects.invert,
-    "greyscale": GramEffects.greyscale
+    "greyscale": GramEffects.greyscale,
+    "mirror": GramEffects.mirror,
+    "deform": GramEffects.deform,
+    "blur": GramEffects.blur
 }

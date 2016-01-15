@@ -15,8 +15,6 @@ from djangogram.settings.base import MAX_IMAGE_SIZE
 import json
 import ntpath
 
-# from django.template.context import RequestContext
-
 
 class IndexView(TemplateView):
 
@@ -66,30 +64,17 @@ class HomeView(LoginRequiredMixin, TemplateView):
         context['profile'] = UserProfile.objects.get(user_id=self.request.user.id)
         return context
 
-    # def delete(self, request, *args, **kwargs):
-    #     image_id = request.POST['image_id']
-    #     photo = Photo.objects.get(id = image_id)
-    #     photo.delete()
-
 
 class EffectView(View):
     def post(self, request, *args, **kwargs):
         effect_name = request.POST['effect_name']
         imageid = request.POST['image_id']
 
-
         image_to_filter = Photo.objects.get(id=imageid).image.path
         if effect_name == 'reset':
-            # import pdb; pdb.set_trace()
             new_photo_path = '/media/uploads/user_' + str(self.request.user.id) + '/' + ntpath.basename(image_to_filter)
         else:
-        # imagefilter = request.POST['img_filter']
-
-        # print "The image effect is" + effect_name
-        # print "The image id is" + imageid
-
             applied_effect = GramEffects.g_open(image_to_filter).g_apply(effect_name)
-            # import pdb; pdb.set_trace()
             filename, file_extension = os.path.splitext(image_to_filter)
             photo_path = filename + 'edited' + file_extension
             new_photo_path = '/media/uploads/user_' + str(self.request.user.id) + '/' + ntpath.basename(photo_path)

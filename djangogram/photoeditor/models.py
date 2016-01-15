@@ -1,11 +1,12 @@
 from __future__ import unicode_literals
+from time import time
 from django.contrib.auth.models import User
 from django.db import models
 
 
 def get_upload_file_name(instance, filename):
     # filename = instance.user.id + instance.file_extension
-    return 'uploads/user_{0}/{1}'.format(instance.user.id, filename)
+    return 'uploads/user_{0}/{1}_{2}'.format(instance.user.id, str(time()).replace('.', ''), filename)
 
 
 class Photo(models.Model):
