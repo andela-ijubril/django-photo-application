@@ -61,3 +61,5 @@ target/
 config.py
 
 .idea/
+
+djangogram/djangogram/media/*

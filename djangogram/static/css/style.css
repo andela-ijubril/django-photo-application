@@ -148,3 +148,16 @@ body, .page-container, .main-container {
 #upload{
     height: 70px;
 }
+
+.logo{
+    font-size: 40px;
+}
+.slogan{
+    font-size: 17px;
+    margin-bottom: 50px;
+}
+.fb-btn{
+    height: 50px;
+    width: 200px;
+    line-height: 35px;
+}

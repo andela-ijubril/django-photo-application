@@ -1,13 +1,15 @@
 import os
 
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render_to_response, redirect, render
-from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.template.context_processors import csrf
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, View
 from forms import PhotoForm
-from models import Photo
+from models import Photo, UserProfile
 from effects import photo_effects
 from djangogram.settings.base import MAX_IMAGE_SIZE
 import json
@@ -17,7 +19,13 @@ import ntpath
 
 
 class IndexView(TemplateView):
-    template_name = 'photoeditor/canvas.html'
+
+    def get(self, request, *args, **kwargs):
+
+        if request.user.is_authenticated():
+            return redirect(reverse('home'))
+
+        return render(self.request, 'photoeditor/login.html')
 
 
 class LoginRequiredMixin(object):
@@ -31,24 +39,8 @@ class LoginRequiredMixin(object):
             request, *args, **kwargs)
 
 
-def login(request):
-    # context = RequestContext(request, {
-    #     'request': request, 'user': request.user})
-    # return render_to_response('login.html', context_instance=context)
-    return render(request, 'photoeditor/login.html')
 
-
-@login_required(login_url='/')
-def home(request):
-    return render_to_response('photoeditor/canvas.html')
-
-
-def logout(request):
-    auth_logout(request)
-    return redirect('/')
-
-
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'photoeditor/canvas.html'
     form_class = PhotoForm
 
@@ -58,7 +50,9 @@ class HomeView(TemplateView):
         if form.is_valid():
             file_size = form.files['image'].size
             if file_size <= MAX_IMAGE_SIZE:
-                form.save()
+                photo = form.save(commit=False)
+                photo.user = self.request.user
+                photo.save()
                 return JsonResponse({
                     'status': 'success'
                 }, status=200)
@@ -70,6 +64,7 @@ class HomeView(TemplateView):
         images = Photo.objects.all()
         context = super(HomeView, self).get_context_data(**kwargs)
         context['images'] = images
+        context['profile'] = UserProfile.objects.get(user_id=self.request.user.id)
         return context
 
     def delete(self, request, *args, **kwargs):
@@ -85,18 +80,15 @@ class EffectView(View):
         image_to_filter = Photo.objects.get(id=imageid).image.path
         # imagefilter = request.POST['img_filter']
 
-        print "The image effect is" + effect_name
-        print "The image id is" + imageid
+        # print "The image effect is" + effect_name
+        # print "The image id is" + imageid
 
-        # import pdb; pdb.set_trace()
         applied_effect = photo_effects.get(effect_name)(image_to_filter)
         filename, file_extension = os.path.splitext(image_to_filter)
         photo_path = filename + 'edited' + file_extension
         new_photo_path = '/media/user_media/' + ntpath.basename(photo_path)
         print new_photo_path + " is my new path"
         applied_effect.save(photo_path)
-
-
 
         return JsonResponse({
                     'status': 'success',
