@@ -42,6 +42,14 @@ var apply_effects = function (image_id) {
     });
 };
 
+var savebtn = $('#savebtn');
+var saveImage = function(){
+    savebtn.click(function () {
+        var image_to_be_saved = $('img').attr('src');
+        console.log(image_to_be_saved);
+    })
+};
+
 var deletebtn = $('#delete');
 var deleteImage = function () {
     deletebtn.click(function () {
@@ -192,4 +200,5 @@ $(document).ready(function () {
     initUploadPlugin();
     facebook.init();
     deleteImage();
+    saveImage();
 });
