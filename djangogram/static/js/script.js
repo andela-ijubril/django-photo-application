@@ -31,8 +31,9 @@ function send_effect(effect_name, image_url, image_id) {
 var apply_effects = function (image_id) {
 
     var effect_class = $('.effects > button');
-
+    effect_class.off('click');
     effect_class.click(function () {
+
         var effect = $(this).data("effect");
 
         console.log(image_id);
