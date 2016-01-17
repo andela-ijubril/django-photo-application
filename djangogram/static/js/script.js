@@ -17,8 +17,9 @@ function send_effect(effect_name, image_url, image_id) {
             image_id: image_id
         },
         success: function (data) {
-            var img_src = data['applied_effect'];
-            $("#img").attr("src", img_src + "?" + new Date().getTime());
+            var img_src = data['applied_effect'] + "?" + new Date().getTime();
+            $("#img").attr("src", img_src);
+            $("#savebtn").attr("href", img_src);
             console.log("I returned success")
 
         },
@@ -31,8 +32,9 @@ function send_effect(effect_name, image_url, image_id) {
 var apply_effects = function (image_id) {
 
     var effect_class = $('.effects > button');
-
+    effect_class.off('click');
     effect_class.click(function () {
+
         var effect = $(this).data("effect");
 
         console.log(image_id);
@@ -195,7 +197,11 @@ $(document).ready(function () {
         var image_to_be_edited = $(this).find('img').attr('src');
         var image_id = $(this).find('img').data('id');
         $('#img-effect').find('img').attr('src', image_to_be_edited + "?" + new Date().getTime());
+        //$('#img-effect').find('img').attr('src', image_to_be_edited + "?" + new Date().getTime());
+        $('#savebtn').attr('href', image_to_be_edited);
+
         apply_effects(image_id);
+
     });
     initUploadPlugin();
     facebook.init();
