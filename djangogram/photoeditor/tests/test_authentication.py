@@ -8,7 +8,7 @@ class AuthenticationTest(TestCase):
         self.user = User.objects.create_user(username='awesome', password='tested')
 
     def test_user_can_login(self):
-        self.assertEqual(2 + 2, 4)
+        pass
 
     def test_authenticated_routes(self):
         pass

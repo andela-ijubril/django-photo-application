@@ -72,6 +72,3 @@ class DjangogramTest(TestCase):
         response = HomeView.as_view()(request)
         self.assertEquals(response.status_code, 200)
 
-
-    def test_djangpgram_effects(self):
-        pass

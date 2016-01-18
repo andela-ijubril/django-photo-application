@@ -55,8 +55,8 @@
                     <form id="upload" method="post" action="/home/" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div id="drop">
-                            Drop Here
-                            <a>Browse</a>
+                            Drop Here or
+                            <a>Browse to upload</a>
                             <input type="file" name="image" multiple/>
                         </div>
                         <ul>
@@ -92,8 +92,8 @@
                     <nav class="effects">
                         <button id="resetbtn" class="btn btn-success" data-effect="reset">Reset Photo</button>
                         <button id="brightnessbtn" class="btn btn-primary" data-effect="brightness">Brightness</button>
-                        <button id="noisebtn" class="btn btn-primary" data-effect="solarize">Solarize</button>
-                        <button id="sepiabtn" class="btn btn-primary" data-effect="sepia">Sepia</button>
+                        <button id="flipbtn" class="btn btn-primary" data-effect="flip">Flip</button>
+                        <button id="solarizebtn" class="btn btn-primary" data-effect="solarize">Solarize</button>
                         <button id="contrastbtn" class="btn btn-primary" data-effect="greyscale">GreyScale</button>
                         <button id="mirrorbtn" class="btn btn-primary" data-effect="mirror">Mirror</button>
                         <button id="deformbtn" class="btn btn-primary" data-effect="deform">Deform</button>
@@ -105,7 +105,6 @@
 
                         <button id="delete" class="btn btn-danger">Delete</button>
                         <button id="share" class="btn btn-primary">Share on Facebook</button>
-{#                        <button id="savebtn" class="btn btn-success">Save Image</button>#}
                         <a href="#" download class="btn btn-success" id="savebtn">Save Image</a>
                     </nav>
 

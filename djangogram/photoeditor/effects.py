@@ -28,27 +28,9 @@ class GramEffects(object):
     def blur(cls):
         return cls.image.filter(ImageFilter.GaussianBlur(radius=2))
 
-    def contour(self):
-        pass
-
-    def detail(self):
-        pass
-
-    def edge_enhance(self):
-        pass
-
-    def emboss(self):
-        pass
-
-    def smooth(self):
-        pass
-
     @classmethod
     def deform(cls):
         return ImageOps.deform(cls.image, deformer=deformer)
-
-    def solarize(self):
-        pass
 
     @classmethod
     def greyscale(cls):
@@ -71,9 +53,9 @@ class GramEffects(object):
         return ImageOps.flip(cls.image)
 
     @classmethod
-    def invert(cls):
+    def solarize(cls):
         # original_image = Image.open(image)
-        return ImageOps.invert(cls.image)
+        return ImageOps.solarize(cls.image)
 
     @classmethod
     def g_apply(cls, effect_name):
@@ -83,7 +65,7 @@ class GramEffects(object):
 photo_effects = {
     "flip": GramEffects.flip,
     "brightness": GramEffects.brighten,
-    "invert": GramEffects.invert,
+    "solarize": GramEffects.solarize,
     "greyscale": GramEffects.greyscale,
     "mirror": GramEffects.mirror,
     "deform": GramEffects.deform,
