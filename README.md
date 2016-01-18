@@ -42,7 +42,7 @@ $ python manage.py test
 ```
 $ coverage run manage.py test
 $ coverage report
-
+```
 Contributing
 ============
 
