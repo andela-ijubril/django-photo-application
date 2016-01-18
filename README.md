@@ -9,11 +9,39 @@ Djangogram is built with the following stack:
 
 * [Django](https://www.djangoproject.com/) - Django makes it easier to build better Web apps more quickly and with less code.
 * [Twitter Bootstrap](http://getbootstrap.com/) - Great UI boilerplate for modern web apps
-* [jquery](https://jquery.com/) - The Write Less, Do More, JavaScript Library.
+* [Jquery](https://jquery.com/) - The Write Less, Do More, JavaScript Library.
+* [Pillow](https://github.com/python-pillow/Pillow/) - Pillow is the friendly PIL fork by Alex Clark and Contributors
+
+#### Requirements
+To install and run this application you need to have python installed on your system
 
 
-#### Installation
+### Installation
+To install the build locally 
+```
+$ git clone https://github.com/andela-ijubril/django-photo-application.git
+$ cd django-photo-application
+$ pip install -r requirements.txt
+```
+Set Up your environment key
+```
+$ touch .env.yml
+$ echo 'SECRET_KEY="any-key-you-wish"
+```
+### Run your build
+```
+$ python django-photo-application/manage.py runserver --settings=settings.development
+```
 
+### Running the test
+To run your test
+```
+$ python manage.py test
+```
+### Coverage
+```
+$ coverage run manage.py test
+$ coverage report
 
 Contributing
 ============
