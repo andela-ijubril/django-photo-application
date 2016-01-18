@@ -8,10 +8,8 @@ A picture is worth a thousand words. Apply effects and share your pictures with 
 Djangogram is built with the following stack:
 
 * [Django](https://www.djangoproject.com/) - Django makes it easier to build better Web apps more quickly and with less code.
-* [Djangorestframework](http://www.django-rest-framework.org/) - Django REST framework is a powerful and flexible toolkit for building Web APIs.
 * [Twitter Bootstrap](http://getbootstrap.com/) - Great UI boilerplate for modern web apps
 * [jquery](https://jquery.com/) - The Write Less, Do More, JavaScript Library.
-* [django swagger](http://django-rest-swagger.readthedocs.org/en/latest/) - An API documentation generator for Swagger UI and Django REST Framework.
 
 
 #### Installation
