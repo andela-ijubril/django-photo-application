@@ -1,3 +1,4 @@
+import os
 from io import BytesIO
 import mock
 
@@ -10,7 +11,7 @@ from django.core.urlresolvers import reverse
 from django.core.files import File
 
 from photoeditor.models import UserProfile, Photo
-from photoeditor.views import HomeView, EffectView
+from photoeditor.views import HomeView, EffectView, DeleteView
 from photoeditor.forms import PhotoForm
 
 
@@ -18,7 +19,7 @@ def create_dummy_image():
     file = BytesIO()
     image = Image.new('RGBA', size=(50, 50), color=(155, 0, 0))
     image.save(file, 'png')
-    file.name = 'test.png'
+    file.name = 'test_image.png'
     file.seek(0)
     return file
 
@@ -39,6 +40,8 @@ class DjangogramTest(TestCase):
         self.file_mock.name = "myimage.jpg"
         self.login = self.client.login(username='itest', password='awesome')
         self.file = create_dummy_image()
+
+        self.photo = Photo.objects.create(image=self.file.name, user=self.user)
 
     def test_user_can_reach_index_page(self):
         url = reverse("index")
@@ -72,3 +75,36 @@ class DjangogramTest(TestCase):
         response = HomeView.as_view()(request)
         self.assertEquals(response.status_code, 200)
 
+    @mock.patch('photoeditor.models.Photo.objects.get')
+    @mock.patch.object(Image, 'open')
+    @mock.patch('ntpath.basename', return_value='open')
+    def test_effect_was_applied(self, mock_file, mock_image, mock_path):
+        request = self.factory.post(
+            '/effect/', {
+                    'image_id': self.photo.id,
+                    'effect_name': 'blur'
+                }
+        )
+        request.user = self.user
+        response = EffectView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
+
+    @mock.patch("photoeditor.models.Photo.objects.get")
+    @mock.patch("os.path.exists", return_value=True)
+    @mock.patch("os.remove")
+    def test_can_delete_image(self, mock_get, mock_path, mock_remove):
+        request = self.factory.post(
+            '/delete/', {
+                'path': self.photo.image.path,
+                    'image_id': 1
+                }
+        )
+
+        request.user = self.user
+
+        response = DeleteView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTrue(Photo.objects.get)
+
+        self.assertTrue(os.remove)

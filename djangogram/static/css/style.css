@@ -30,6 +30,9 @@ h1 {
     margin: 10px 0 0 0;
 }
 
+.navbar{
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.1);
+}
 canvas {
     margin: 10px 0;
     width: 100%;
@@ -151,6 +154,7 @@ body, .page-container, .main-container {
 }
 #upload{
     height: 70px;
+    margin-top: 40px;
 }
 
 .logo{
@@ -164,4 +168,9 @@ body, .page-container, .main-container {
     height: 50px;
     width: 200px;
     line-height: 35px;
+}
+
+#profile-img{
+height: 30px;
+    margin-top: 10px;
 }

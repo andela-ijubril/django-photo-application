@@ -33,8 +33,11 @@ class GramEffects(object):
         return ImageOps.deform(cls.image, deformer=deformer)
 
     @classmethod
+    def solarize(cls):
+        return ImageOps.solarize(cls.image)
+
+    @classmethod
     def greyscale(cls):
-        # original_image = Image.open(image)
         return ImageOps.grayscale(cls.image)
 
     @classmethod
@@ -43,19 +46,12 @@ class GramEffects(object):
 
     @classmethod
     def brighten(cls):
-        # original_image = Image.open(image)
         enhancer = ImageEnhance.Brightness(cls.image)
         return enhancer.enhance(1.5)
 
     @classmethod
     def flip(cls):
-        # original_image = Image.open(image)
         return ImageOps.flip(cls.image)
-
-    @classmethod
-    def solarize(cls):
-        # original_image = Image.open(image)
-        return ImageOps.solarize(cls.image)
 
     @classmethod
     def g_apply(cls, effect_name):

@@ -28,7 +28,8 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^logout/$', logout, {'next_page': '/'}),
     url(r'^home/$', views.HomeView.as_view(), name='home'),
-    url(r'^effect/$', views.EffectView.as_view()),
+    url(r'^effect/$', views.EffectView.as_view(), name='effects'),
+    url(r'^delete/$', views.DeleteView.as_view(), name='delete'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': settings.MEDIA_ROOT,
     })
