@@ -3,12 +3,22 @@ $.ajaxSetup({
         "X-CSRFToken": $("meta[name='csrf-token']").attr("content")
     }
 });
-var image_html = "<div class=\"single-image\"><a href=\"#\"><img src=\"\" class=\"img-responsive image-sidebar\" > </a> </div>";
-var image_sidebar = $('.image-sidebar');
-
-var image_content = "";
+//var image_html = "<div class=\"single-image\"><a href=\"#\"><img src=\"\" class=\"img-responsive image-sidebar\" > </a> </div>";
+//var image_sidebar = $('.image-sidebar');
+//
+//var image_content = "";
 
 function send_effect(effect_name, image_url, image_id) {
+    $.notify('<strong>Applying effects...</strong>', {
+        type: 'info',
+        allow_dismiss: true,
+        delay: 1000,
+        timer: 700,
+        placement: {
+            from: "top",
+            align: "center"
+        },
+    });
     $.ajax({
         url: image_url,
         type: "POST",
@@ -44,35 +54,33 @@ var apply_effects = function (image_id) {
     });
 };
 
-//var savebtn = $('#savebtn');
-//var saveImage = function () {
-//    savebtn.click(function () {
-//        var image_to_be_saved = $('img').attr('src');
-//        console.log(image_to_be_saved);
-//    })
-//};
-
 var deletebtn = $('#delete');
 var deleteImage = function () {
-    deletebtn.click(function () {
-        var image_to_be_deleted = $("#img").attr("src");
-        console.log(image_to_be_deleted);
-        var image_id = $("#img").data('id');
-        console.log(image_id);
-        $.ajax({
-        url: '/delete/',
-        type: "POST",
-        data: {
-            image_id: image_id
-        },
-        success: function () {
-            window.location.reload()
+    deletebtn.click(function (e) {
+        e.preventDefault();
+        var result = confirm("Are you sure you want to delete");
+        console.log(result);
+        if (result) {
+            var image_to_be_deleted = $("#img").attr("src");
+            console.log(image_to_be_deleted);
+            var image_id = $("#img").data('id');
+            console.log(image_id);
+            $.ajax({
+                url: '/delete/',
+                type: "POST",
+                data: {
+                    image_id: image_id
+                },
+                success: function () {
+                    window.location.reload()
 
-        },
-        error: function () {
+                },
+                error: function () {
 
+                }
+            })
         }
-    })
+
     });
 };
 
@@ -115,8 +123,6 @@ var initUploadPlugin = function () {
             // Add the HTML to the UL element
             data.context = tpl.appendTo(ul);
 
-            // Initialize the knob plugin
-            //tpl.find('input').knob();
 
             // Listen for clicks on the cancel icon
             tpl.find('span').click(function () {
@@ -161,11 +167,6 @@ var initUploadPlugin = function () {
             data.context.addClass('error');
         }
     });
-
-    // Prevent the default action when a file is dropped on the window
-    //    $(document).on('drop dragover', function (e) {
-    //    e.preventDefault();
-    //});
 
 }
 
@@ -222,5 +223,5 @@ $(document).ready(function () {
     initUploadPlugin();
     facebook.init();
     deleteImage();
-    //saveImage();
+
 });

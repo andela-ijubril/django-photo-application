@@ -10,10 +10,8 @@ class Deformer:
 
 deformer = Deformer()
 
-class GramEffects(object):
 
-    def __init__(self, image):
-        self.original_image = Image.open(image)
+class GramEffects(object):
 
     @classmethod
     def g_open(cls, image):
