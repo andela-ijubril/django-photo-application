@@ -44,19 +44,35 @@ var apply_effects = function (image_id) {
     });
 };
 
-var savebtn = $('#savebtn');
-var saveImage = function(){
-    savebtn.click(function () {
-        var image_to_be_saved = $('img').attr('src');
-        console.log(image_to_be_saved);
-    })
-};
+//var savebtn = $('#savebtn');
+//var saveImage = function () {
+//    savebtn.click(function () {
+//        var image_to_be_saved = $('img').attr('src');
+//        console.log(image_to_be_saved);
+//    })
+//};
 
 var deletebtn = $('#delete');
 var deleteImage = function () {
     deletebtn.click(function () {
         var image_to_be_deleted = $("#img").attr("src");
         console.log(image_to_be_deleted);
+        var image_id = $("#img").data('id');
+        console.log(image_id);
+        $.ajax({
+        url: '/delete/',
+        type: "POST",
+        data: {
+            image_id: image_id
+        },
+        success: function () {
+            window.location.reload()
+
+        },
+        error: function () {
+
+        }
+    })
     });
 };
 
@@ -197,7 +213,7 @@ $(document).ready(function () {
         var image_to_be_edited = $(this).find('img').attr('src');
         var image_id = $(this).find('img').data('id');
         $('#img-effect').find('img').attr('src', image_to_be_edited + "?" + new Date().getTime());
-        //$('#img-effect').find('img').attr('src', image_to_be_edited + "?" + new Date().getTime());
+        $('#img-effect').find('img').attr('data-id', image_id);
         $('#savebtn').attr('href', image_to_be_edited);
 
         apply_effects(image_id);
@@ -206,5 +222,5 @@ $(document).ready(function () {
     initUploadPlugin();
     facebook.init();
     deleteImage();
-    saveImage();
+    //saveImage();
 });

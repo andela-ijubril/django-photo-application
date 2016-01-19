@@ -69,6 +69,7 @@ class EffectView(View):
     def post(self, request, *args, **kwargs):
         effect_name = request.POST['effect_name']
         imageid = request.POST['image_id']
+        # import pdb; pdb.set_trace()
 
         image_to_filter = Photo.objects.get(id=imageid).image.path
         if effect_name == 'reset':
@@ -84,4 +85,15 @@ class EffectView(View):
         return JsonResponse({
                     'status': 'success',
                     'applied_effect': new_photo_path
+                }, status=200)
+
+
+class DeleteView(View):
+    def post(self, request, *args, **kwargs):
+        image_id = request.POST['image_id']
+        photo = Photo.objects.get(id=image_id)
+        photo.delete()
+
+        return JsonResponse({
+                    'status': 'deleted',
                 }, status=200)
