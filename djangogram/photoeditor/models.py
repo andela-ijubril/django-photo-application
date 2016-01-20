@@ -9,11 +9,13 @@ from django.dispatch import receiver
 
 
 def get_upload_file_name(instance, filename):
-    # filename = instance.user.id + instance.file_extension
     return 'uploads/user_{0}/{1}_{2}'.format(instance.user.id, str(time()).replace('.', ''), filename)
 
 
 class Photo(models.Model):
+    """
+    Photo Models
+    """
     image = models.ImageField(upload_to=get_upload_file_name)
     name = models.CharField(max_length=100, blank=True)
     created = models.DateTimeField(auto_now_add=True)
