@@ -97,12 +97,9 @@ class DjangogramTest(TestCase):
                     'image_id': 1
                 }
         )
-
         request.user = self.user
 
         response = DeleteView.as_view()(request)
         self.assertEqual(response.status_code, 200)
-
         self.assertTrue(Photo.objects.get)
-
         self.assertTrue(os.remove)

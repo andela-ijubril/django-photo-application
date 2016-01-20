@@ -9,7 +9,7 @@ $.ajaxSetup({
 //var image_content = "";
 
 function send_effect(effect_name, image_url, image_id) {
-    $.notify('<strong>Applying effects...</strong>', {
+    $.notify('<strong>Applying effect...</strong>', {
         type: 'info',
         allow_dismiss: true,
         delay: 1000,
@@ -65,6 +65,18 @@ var deleteImage = function () {
             console.log(image_to_be_deleted);
             var image_id = $("#img").data('id');
             console.log(image_id);
+
+            $.notify('<strong>Deleting image...</strong>', {
+        type: 'info',
+        allow_dismiss: true,
+        delay: 1000,
+        timer: 700,
+        placement: {
+            from: "top",
+            align: "center"
+        }
+    });
+
             $.ajax({
                 url: '/delete/',
                 type: "POST",
