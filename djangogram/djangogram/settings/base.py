@@ -170,6 +170,7 @@ SOCIAL_AUTH_PIPELINE = (
     'photoeditor.pipeline.save_user_profile',
 )
 
+UPLOAD_FOLDER = '/media/uploads/user_'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

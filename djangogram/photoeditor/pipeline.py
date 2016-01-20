@@ -2,7 +2,9 @@ from photoeditor.models import UserProfile
 
 
 def save_user_profile(backend, user, response, *args, **kwargs):
-    # Save Facebook profile photo into the user profile
+    """
+    Save facebook profile into the UserProfile table
+    """
     if backend.name == "facebook":
         img_url = "http://graph.facebook.com/{0}/picture".format(
             response['id'])

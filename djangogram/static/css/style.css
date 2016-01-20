@@ -178,3 +178,8 @@ height: 30px;
 .tagline{
 background-color: #ffffff;
 }
+
+.tag-msg{
+    margin-bottom: 20px;
+    padding: 10px;
+}

@@ -16,8 +16,7 @@ class GramEffects(object):
     @classmethod
     def g_open(cls, image):
         '''
-        :param image:
-        :return: cls
+        A class method that opens an image and returns a class
         '''
         cls.image = Image.open(image)
         return cls
@@ -51,8 +50,12 @@ class GramEffects(object):
     def flip(cls):
         return ImageOps.flip(cls.image)
 
-    @classmethod
-    def g_apply(cls, effect_name):
+    @staticmethod
+    def g_apply(effect_name):
+        """
+        A class method that apply any effect specified in the photo_effects dictionary
+        :param effect_name:
+        """
         effect = photo_effects.get(effect_name)
         return effect()
 

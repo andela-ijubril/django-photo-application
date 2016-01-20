@@ -3,10 +3,6 @@ $.ajaxSetup({
         "X-CSRFToken": $("meta[name='csrf-token']").attr("content")
     }
 });
-//var image_html = "<div class=\"single-image\"><a href=\"#\"><img src=\"\" class=\"img-responsive image-sidebar\" > </a> </div>";
-//var image_sidebar = $('.image-sidebar');
-//
-//var image_content = "";
 
 function send_effect(effect_name, image_url, image_id) {
     $.notify('<strong>Applying effect...</strong>', {
@@ -43,6 +39,7 @@ var apply_effects = function (image_id) {
 
     var effect_class = $('.effects > button');
     effect_class.off('click');
+
     effect_class.click(function () {
 
         var effect = $(this).data("effect");
