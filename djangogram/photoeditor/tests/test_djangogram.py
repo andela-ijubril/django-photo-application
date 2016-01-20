@@ -38,14 +38,13 @@ class DjangogramTest(TestCase):
 
         self.file_mock = mock.MagicMock(spec=File)
         self.file_mock.name = "myimage.jpg"
-        self.login = self.client.login(username='itest', password='awesome')
+        self.client.login(username='itest', password='awesome')
         self.file = create_dummy_image()
 
         self.photo = Photo.objects.create(image=self.file.name, user=self.user)
 
     def test_user_can_reach_index_page(self):
         url = reverse("index")
-        # import pdb; pdb.set_trace()
         response = Client().get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -55,7 +54,6 @@ class DjangogramTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_can_reach_home_page(self):
-        self.login = self.client.login(username='itest', password='awesome')
         url = reverse("home")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -99,12 +97,9 @@ class DjangogramTest(TestCase):
                     'image_id': 1
                 }
         )
-
         request.user = self.user
 
         response = DeleteView.as_view()(request)
         self.assertEqual(response.status_code, 200)
-
         self.assertTrue(Photo.objects.get)
-
         self.assertTrue(os.remove)

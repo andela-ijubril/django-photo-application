@@ -16,16 +16,6 @@ import json
 import ntpath
 
 
-class IndexView(TemplateView):
-
-    def get(self, request, *args, **kwargs):
-
-        if request.user.is_authenticated():
-            return redirect(reverse('home'))
-
-        return render(self.request, 'photoeditor/login.html')
-
-
 class LoginRequiredMixin(object):
     """
     Enforce login on some views
@@ -35,6 +25,16 @@ class LoginRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         return super(LoginRequiredMixin, self).dispatch(
             request, *args, **kwargs)
+
+
+class IndexView(TemplateView):
+    template_name = 'photoeditor/login.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return redirect(reverse('home'))
+
+        return render(self.request, self.template_name)
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -69,7 +69,6 @@ class EffectView(View):
     def post(self, request, *args, **kwargs):
         effect_name = request.POST['effect_name']
         imageid = request.POST['image_id']
-        # import pdb; pdb.set_trace()
 
         image_to_filter = Photo.objects.get(id=imageid).image.path
         if effect_name == 'reset':
@@ -79,7 +78,6 @@ class EffectView(View):
             filename, file_extension = os.path.splitext(image_to_filter)
             photo_path = filename + 'edited' + file_extension
             new_photo_path = '/media/uploads/user_' + str(self.request.user.id) + '/' + ntpath.basename(photo_path)
-            print new_photo_path + " is my new path"
             applied_effect.save(photo_path)
 
         return JsonResponse({
