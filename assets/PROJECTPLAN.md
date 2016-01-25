@@ -1,29 +1,30 @@
 # Project Plan for django-photo-application
 
-# Project Title [Djangogram]
+###### Project Title [Djangogram]
 
-# Start Date 20/12/2015
+###### Start Date 20/12/2015
 
-# End Date 24/2/2015
+###### End Date 24//2016
 
 
-# Application Overview
+### Application Overview
 Djangogram is a photo editing application where you can apply special effects to your photos and share those wonderful pictures to your friends.
 
-# Features:
+### Features:
 Djangogram has the followoing features
 - Fully responsive design
 - photo uploading capabilities
 - Special filters application to pictures
 - saving and sharing of pictures on facebook.
 
-# Technologies Used
+### Technologies Used
 - Django
 - bootstrap
 - jquery
+- pillow
 
 
-# Tasks and Deliverables
+### Tasks and Deliverables
 
 
 
