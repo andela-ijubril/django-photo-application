@@ -1,4 +1,17 @@
-html, body, .container-table {
+/*html, body, .page-container, .main-container {*/
+    /*height: 650px;*/
+    /*overflow: hidden;*/
+/*}*/
+html, body, .container-fluid{
+    height: 100%;
+}
+.page-container, .main-container {
+    min-height: 100%;
+    height: 650px;
+    overflow: hidden;
+}
+
+.container-table {
     height: 100%;
 }
 
@@ -15,7 +28,7 @@ body {
     background-color: #f6f6f6;
 }
 
-.fbtn{
+.fbtn {
     margin-bottom: 30px;
 }
 
@@ -30,9 +43,10 @@ h1 {
     margin: 10px 0 0 0;
 }
 
-.navbar{
-    box-shadow: 4px 4px 5px rgba(0,0,0,0.1);
+.navbar {
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.1);
 }
+
 canvas {
     margin: 10px 0;
     width: 100%;
@@ -50,11 +64,6 @@ input[type="range"] {
 .p {
     padding-top: 50px;
     clear: both;
-}
-
-body, .page-container, .main-container {
-    height: 650px;
-    overflow: hidden;
 }
 
 .page-container {
@@ -120,70 +129,77 @@ body, .page-container, .main-container {
     display: block;
 }
 
-.navbar{
+.navbar {
     background-color: white;
 }
 
-.img-container{
+.img-container {
     margin-top: 10px;
-    height: 460px;
+    height: 70%;
     width: 100%;
-
 }
-.img-container .img-responsive{
+
+.img-container .img-responsive {
     height: 100%;
 }
-#img{
+
+#img {
     display: block;
     margin: auto;
+    padding-top: 20px;
 }
 
-.single-image{
+.single-image {
     height: 200px;
     width: 100%;
     margin-bottom: 10px;
 }
-.single-image .img-responsive{
+
+.single-image .img-responsive {
     height: 100%;
     margin: auto;
     display: block;
 }
 
-#drop input{
+#drop input {
     display: none;
 }
-#upload{
+
+#upload {
     height: 70px;
     margin-top: 40px;
 }
 
-.logo{
+.logo {
     font-size: 40px;
 }
-.slogan{
+
+.slogan {
     font-size: 17px;
     margin-bottom: 50px;
 }
-.fb-btn{
+
+.fb-btn {
     height: 50px;
     width: 200px;
     line-height: 35px;
 }
 
-#profile-img{
-height: 30px;
+#profile-img {
+    height: 30px;
     margin-top: 10px;
 }
 
-.tagline{
-background-color: #ffffff;
+.tagline {
+    background-color: #ffffff;
 }
 
-.tag-msg{
+.tag-msg {
     margin-bottom: 20px;
     padding: 10px;
 }
-.gramlogo{
+
+.gramlogo {
     min-height: 100%;
     height: 60px;
 }

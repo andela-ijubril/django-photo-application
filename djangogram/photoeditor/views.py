@@ -46,6 +46,9 @@ class IndexView(TemplateView):
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
+    """
+    The Home view that handles file upload and returning photos for the current logged in user
+    """
     template_name = 'photoeditor/canvas.html'
     form_class = PhotoForm
 
@@ -106,7 +109,7 @@ class DeleteView(View):
     The view that handles the deleting of image
     """
     def post(self, request, *args, **kwargs):
-        image_id = request.POST['image_id']
+        image_id = request.POST['imageId']
         photo = Photo.objects.get(id=image_id)
         photo.delete()
 
