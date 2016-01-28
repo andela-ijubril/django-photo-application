@@ -94,7 +94,7 @@ class DjangogramTest(TestCase):
         request = self.factory.post(
             '/delete/', {
                 'path': self.photo.image.path,
-                    'image_id': 1
+                    'imageId': 1
                 }
         )
         request.user = self.user
