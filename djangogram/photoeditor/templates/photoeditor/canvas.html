@@ -57,7 +57,7 @@
                         <div id="drop">
                             Drop Here or
                             <a href="#">Browse to upload</a>
-                            <input type="file" name="image" multiple/>
+                            <input type="file" name="image" multiple accept="image/*"/>
                         </div>
                         <ul>
                             <!-- The file uploads will be shown here -->
@@ -81,16 +81,11 @@
         <div class="col-md-9 canvas-container">
 
             <div class="img-container" id="img-effect">
-                <div id="placeholder-msg">
-                    Click on the image on the right
-                </div>
-
                 <img class="img-responsive" id="img" data-id="">
             </div>
             <div class="row">
 
                 <div class="col-md-12 effect-container">
-
 
                     <nav class="effects">
                         <button id="resetbtn" class="btn btn-success" data-effect="reset">Reset Photo</button>
