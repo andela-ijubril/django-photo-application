@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200' rel='stylesheet' type='text/css'>
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token }}">
@@ -12,15 +13,15 @@
 <body class="home-bg">
 
 
-<div class="container container-table">
+<div class="container container-table tag-container">
     <div class="row vertical-center-row">
         <div class="text-center col-md-4 col-md-offset-4">
         <div class="tagline">
             <p class="logo">Djangogram</p>
             <p class="slogan">A picture is worth a thousand words!</p>
             <hr>
-            <div class="tag-msg">Apply effects and share your pictures with djangogram</div>
-               <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary fbtn">Login with Facebook</a>
+
+               <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-lg fbtn">Login with Facebook</a>
         </div>
 
 
@@ -28,3 +29,6 @@
         </div>
     </div>
 </div>
+
+</body>
+</html>
