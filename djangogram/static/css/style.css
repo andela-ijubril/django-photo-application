@@ -31,7 +31,7 @@ body {
 .fbtn {
     margin-bottom: 30px;
     background-color: #3b5998;
-    border: white 1px solid;
+    border: #4D6FAC 1px solid;
     transition: all .5s ease-out;
 }
 
@@ -160,7 +160,11 @@ input[type="range"] {
 .single-image {
     height: 200px;
     width: 100%;
+    margin: auto;
+    max-width:250px;
+    max-height: 250px;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 .single-image .img-responsive {
@@ -215,4 +219,12 @@ input[type="range"] {
 .tag-container{
     width: 100%;
     color: white;
+}
+
+#placeholder-msg{
+    width: 640px; /*can be in percentage also.*/
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
 }

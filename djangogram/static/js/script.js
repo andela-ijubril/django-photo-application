@@ -218,6 +218,7 @@ $(document).ready(function () {
     var imageId = $(this).find('img').data('id');
     $('#img-effect').find('img').attr('src', imageToBeEdited + '?' + new Date().getTime());
     $('#img-effect').find('img').attr('data-id', imageId);
+    $('#placeholder-msg').hide();
     $('#savebtn').attr('href', imageToBeEdited);
 
     applyEffects(imageId);

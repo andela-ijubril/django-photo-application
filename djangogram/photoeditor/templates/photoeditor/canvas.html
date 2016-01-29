@@ -56,7 +56,7 @@
                         {% csrf_token %}
                         <div id="drop">
                             Drop Here or
-                            <a>Browse to upload</a>
+                            <a href="#">Browse to upload</a>
                             <input type="file" name="image" multiple/>
                         </div>
                         <ul>
@@ -79,9 +79,12 @@
             </div>
         </div>
         <div class="col-md-9 canvas-container">
-            {#            <canvas id="canvas"></canvas>#}
+
             <div class="img-container" id="img-effect">
-                {#                <img src="{% static "img/baby.jpg" %}" class="img-responsive" id="img">#}
+                <div id="placeholder-msg">
+                    Click on the image on the right
+                </div>
+
                 <img class="img-responsive" id="img" data-id="">
             </div>
             <div class="row">
