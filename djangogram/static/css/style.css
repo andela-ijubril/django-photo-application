@@ -228,3 +228,12 @@ input[type="range"] {
     padding: 10px;
     position: relative;
 }
+
+.btn-effects{
+    display: none;
+}
+
+.empty-text{
+    margin-top: 40px;
+    font-size: large;
+}
