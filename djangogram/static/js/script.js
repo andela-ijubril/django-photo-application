@@ -219,6 +219,8 @@ $(document).ready(function () {
     $('#img-effect').find('img').attr('src', imageToBeEdited + '?' + new Date().getTime());
     $('#img-effect').find('img').attr('data-id', imageId);
     $('#placeholder-msg').hide();
+    $('.empty-text').hide();
+    $('.btn-effects').show();
     $('#savebtn').attr('href', imageToBeEdited);
 
     applyEffects(imageId);

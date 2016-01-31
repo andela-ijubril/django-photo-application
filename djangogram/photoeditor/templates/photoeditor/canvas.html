@@ -73,7 +73,8 @@
                             </div>
                         {% endfor %}
                         {% else %}
-                        You currently have no images
+                        <img src="{% static "img/empty.png" %}"> <br>
+                       No photo Uploaded yet
                     {% endif %}
 
                 </div>
@@ -83,9 +84,10 @@
         <div class="col-md-9 canvas-container">
 
             <div class="img-container" id="img-effect">
+                <div class="empty-text">Upload/Click on the image to apply effect</div>
                 <img class="img-responsive" id="img" data-id="">
             </div>
-            <div class="row">
+            <div class="row btn-effects">
 
                 <div class="col-md-12 effect-container">
 
