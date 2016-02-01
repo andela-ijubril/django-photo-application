@@ -1,6 +1,8 @@
 html, body, .container-fluid{
     height: 100%;
+    overflow-y: hidden;
 }
+
 .page-container, .main-container {
     min-height: 100%;
     height: 100%;
@@ -227,4 +229,8 @@ input[type="range"] {
 .empty-text{
     margin-top: 40px;
     font-size: large;
+}
+
+.logged-in{
+    padding: 15px;
 }

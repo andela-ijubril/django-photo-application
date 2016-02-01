@@ -36,7 +36,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><img src="{{ profile.profile_pics }}" alt="{{ request.user.username }}'s + profile pics"
                                  class="img-circle img-responsive" id="profile-img"></li>
-                        <li><a href="#">Logged in as {{ request.user.get_full_name }}</a></li>
+                        <li class="logged-in">Logged in as {{ request.user.get_full_name }}</li>
                         <li><a href="/logout">Logout</a></li>
 
 
