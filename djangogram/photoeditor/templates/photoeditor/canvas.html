@@ -27,6 +27,11 @@
                         <span class="icon-bar"></span>
                     </button>
                     <img src="{% static "img/gramicon2.png" %}" alt="logo" class="navbar-brand img-circle gramlogo">
+                    <a href="#">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="logo-name">Djangogram</li>
+                        </ul>
+                    </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -72,9 +77,9 @@
                                 </a>
                             </div>
                         {% endfor %}
-                        {% else %}
+                    {% else %}
                         <img src="{% static "img/empty.png" %}"> <br>
-                       No photo Uploaded yet
+                        No photo Uploaded yet
                     {% endif %}
 
                 </div>
